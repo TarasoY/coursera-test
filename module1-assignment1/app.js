@@ -6,14 +6,11 @@ angular.module('LunchCheck', [])
 
 LunchCheckController.$inject = ['$scope']
 function LunchCheckController($scope) {
-  $scope.name = "Tarasoy";
   $scope.message = " ";
 
   $scope.dishCheck = function () {
     var menu = document.getElementById('lunch-menu').value;
     var arr = menu.split(',');
-    console.log(arr);
-    console.log(arr.length);
 
     if (arr.length > 3) {
       $scope.message == "Too much!";
