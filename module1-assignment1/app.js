@@ -6,21 +6,31 @@ angular.module('LunchCheck', [])
 
 LunchCheckController.$inject = ['$scope']
 function LunchCheckController($scope) {
-    $scope.dishes = "";
+  $scope.message = "";
 
-  $scope.dishCheck = function () {
-    var menu = $scope.dishes.split(',');
-    if (menu.length > 3) {
+  $scope.dishCheck = function() {
+    var dishes_count = dishesNum($scope.dishes);
+
+    if (dishes_count > 3) {
       $scope.message == "Too much!";
     }
-    else if (menu.length <= 3) {
+    else if (dishes_count <= 3) {
       $scope.message == "Enjoy!";
     }
-    else if (menu.length == 1 && arr[0] =='') {
+    else if (dishes_count == 0 ) {
       $scope.message == "Please enter data first";
     }
 
   }
+
+  function dishesNum(str) {
+    var dishes = str.split(',');
+    var dishes_num = dishes.length;
+
+    return dishes_num;
+  }
+
 }
 
 })();
+
