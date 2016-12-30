@@ -1,36 +1,38 @@
-(function () {
+(function() {
 'use strict';
 
 angular.module('LunchCheck', [])
 .controller('LunchCheckController', LunchCheckController);
 
 LunchCheckController.$inject = ['$scope']
+
 function LunchCheckController($scope) {
-  $scope.message = "";
+  $scope.dishes = "";
+
 
   $scope.dishCheck = function() {
-    var dishes_count = dishesNum($scope.dishes);
+    var dishes_arr = $scope.dishes.split(',');
+    var dishes_count = checkForEmptyElements(dishes_arr);
 
-    if (dishes_count > 3) {
-      $scope.message == "Too much!";
+    if (dishes_count == 0 ) {
+      $scope.message = "Please enter data first";
+    }
+    else if (dishes_count > 3) {
+      $scope.message = "Too much!";
     }
     else if (dishes_count <= 3) {
-      $scope.message == "Enjoy!";
+      $scope.message = "Enjoy!";
     }
-    else if (dishes_count == 0 ) {
-      $scope.message == "Please enter data first";
-    }
-
   }
 
-  function dishesNum(str) {
-    var dishes = str.split(',');
-    var dishes_num = dishes.length;
-
-    return dishes_num;
+  function checkForEmptyElements(arr) {
+    var n = arr.length;
+    for (var i = 0; i < arr.length; i++) {
+      if(!arr[i]) n--;
+    }
+    return n;
   }
 
 }
 
 })();
-
